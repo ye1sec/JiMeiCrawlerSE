@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Search</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+{% load static %}
+<script  src={% static "js/jquery-3.3.1.js" %}></script>
+<link href={% static "css/spigPet.css" %} rel="stylesheet"/>
+<link href={% static "css/live2d.css" %} rel="stylesheet"/>
+<link href={% static "css/index.css" %} rel="stylesheet"/>
+<link href={% static "css/pagination.css" %} rel="stylesheet"/>
+<link href={% static "css/common.css" %} rel="stylesheet"/>
+<link href={% static "css/showTitle.css" %} rel="stylesheet"/>
+<link href={% static "css/jquery.fancyspinbox.css" %} rel="stylesheet" >
+
+<script  src={% static "js/jquery.pagination.js" %}></script>
+<script  src={% static "js/peach_heart.js" %}></script>
+<script  src={% static "js/spig.js" %}></script>
+
+<script type="text/javascript">
+	var message_Path ="{% static "/" %}";
+	var home_Path = 'http://localhost:8000/';
+</script>
+
+<script type="text/javascript">
+var isindex = true;
+var visitor = true;
+</script>
+<body>
+
+
+
+<div id="showSome">collegeSe</div>
+<div id="">
+<div id="jimei">
+	<div class="input">
+		<input type="text"  class="searchInput " id="search" maxlength="100" value=" " ><span class="clear" id="cls">X</span>
+
+	</div>
+		<div class="container" >
+			<select id="my-menu" onchange="get_data()" >
+				<option value="" selected>所有学院</option>
+				<option value="nav">航海学院</option>
+				<option value="mei">轮机工程学院</option>
+				<option value="fishery">水产学院</option>
+				<option value="bec">食品与生物工程学院</option>
+				<option value="phys">体育学院</option>
+				<option value="cjc">财经学院</option>
+				<option value="teacher">教师教育学院</option>
+				<option value="ms">工商管理学院</option>
+				<option value="com">音乐学院</option>
+				<option value="arts">美术学院</option>
+				<option value="ie">信息工程学院</option>
+				<option value="cec">计算机工程学院</option>
+				<option value="me">机械与能源工程学院</option>
+				<option value="sci">理学院</option>
+				<option value="sfl">外国语学院</option>
+				<option value="soc">法学院</option>
+				<option value="chin">文学院</option>
+				<option value="engtech">工程技术学院</option>
+				<option value="szb">马克思主义学院</option>
+				<option value="ae">继续教育学院（船员培训中心）</option>
+				<option value="oec">海外教育学院</option>
+			</select>
+			<script  src={% static "js/jquery.fancyspinbox.js" %}></script>
+			<script>
+			$('#my-menu').fancyspinbox();
+			</script>
+		</div>
+</div>
+<!--搜索结果 -->
+<div class="resultList" >
+<!--查询的花费的时间 -->
+<div class="time">
+
+ </div>
+ <!--搜索信息结果-->
+ <ul class="resultInfo">
+
+ </ul>
+ <!-- 分页 -->
+<div class="M-box"></div>
+</div>
+</div>
+
+<!--小人只在首页显示 start*-->
+<div id="spig" class="spig">
+	<div id="messagePig"></div>
+	<div id="mumu" class="mumu"></div>
+</div>
+
+<!--live2d start*-->
+<div id="landlord">
+	<div class="message" style="opacity:0"></div>
+	<canvas id="live2d" width="400" height="350" class="live2d"></canvas>
+</div>
+
+
+
+
+
+
+<!-- 相关搜索 -->
+<script>
+
+$(".searchInput").bind("input propertychange",function(){
+		if($(this).val().length==0){
+			$(".resultList").hide();
+
+		}else{
+
+			$(".resultList").show();
+		}
+		get_data()
+
+	});
+
+
+function get_data(){
+		search_url="/search/";
+		$.ajax({
+				type: "GET",
+				url: search_url,
+				data: {"q": $(".searchInput").val(),"c": $("#my-menu").val()},
+				success: function(data){
+							infos="";
+							for(var i=0;i<data.all_hits.length;i++){
+								infos+='<li><a href='+data.all_hits[i]["url"]+' target="_blank" class="infoHead">'+data.all_hits[i]["title"]+'<a><p class="infoBody">' +
+								data.all_hits[i]["content"]+'</p></li>';
+							}
+							$(".resultInfo").html(infos);
+
+
+							spend_time='<p class="totalTimes">找到了'+data.total_nums+'条数据,共有'+ data.paga_nums+'页,花费了'+ data.last_time+'秒</P>';
+							$(".time").html(spend_time);
+
+							 $('.M-box').pagination({
+								  coping: true,
+								  pageCount: data.paga_nums ,
+								  homePage: '首页',
+								  endPage: '末页',
+								  prevContent: '上页',
+								  nextContent: '下页',
+								  callback: function(api){
+									$.ajax({
+										type: "GET",
+										url: search_url,
+										data: {"q":$(".searchInput").val(),"p":api.getCurrent(),"c":$("#my-menu").val()},
+										success: function(data){
+													infos="";
+													for(var i=0;i<data.all_hits.length;i++){
+														infos+='<li><a href='+data.all_hits[i]["url"]+' target="_blank" class="infoHead">'+
+														data.all_hits[i]["title"]+'<a><p class="infoBody">' +
+														data.all_hits[i]["content"]+'</p></li>';
+													}
+													$(".resultInfo").html(infos);
+										}
+
+									});
+
+							  }
+
+
+
+
+			});
+
+
+}
+
+});
+}
+
+</script>
+
+
+<script>
+$(".searchInput").keyup(function(){
+	if($(this).val().length>0){
+		$(".clear").css("visibility","visible");
+	}else{
+		$(".clear").css("visibility","hidden");
+	}
+	$(".clear").click(function(){
+	$(".searchInput").val("");
+	$(".clear").css("visibility","hidden");
+
+
+  });
+
+
+});
+
+
+</script>
+
+<script type="text/javascript" src={% static "js/live2d.js" %}></script>
+<script type="text/javascript" src={% static "js/message.js" %}></script>
+<script type="text/javascript">
+	loadlive2d("live2d", "{% static "model/Pio/model.json" %}");
+</script>
+
+</body>
+</html>

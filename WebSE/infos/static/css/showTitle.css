@@ -1,0 +1,38 @@
+/* latin */
+ @font-face {
+	font-family:'test';
+	font-style: normal;
+	src: url('BrushScriptStd.otf') format('truetype')
+
+}
+@-webkit-keyframes background {
+	from {
+		background-position: 0 0%;
+	}
+	to {
+		background-position: 0 -300px;
+	}
+}
+@keyframes background {
+	from {
+		background-position: 0 0%;
+	}
+	to {
+		background-position: 0 -300px;
+	}
+}
+
+
+#showSome {
+	font-size: 100px;
+	font-family: 'test';
+	background: url(../images/bubbles.png) repeat #011F42;
+	margin-left: 150px;
+	background-size: 100px auto;
+	-webkit-text-fill-color: transparent;
+	text-fill-color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-animation: background 12s infinite linear;
+	animation: background 12s infinite linear;
+}

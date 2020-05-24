@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Your Name (you@example.org)
+ * @date    2018-11-04 19:21:57
+ * @version $Id$
+ */
+*:focus {outline: none; }
+body{height: 500px; background: #F7EACF; margin-left:30% ;}
+#jimei{height: 36px;}
+#jimei .input{border: 0px solid #7AA7AB;height: 100%;}
+#jimei .clear{height:100%; font-size:25px;text-align: center;cursor: pointer;background:grey;padding-right: 0px; visibility: hidden; opacity: 0.8;color: red;}
+#jimei .searchInput{height: 100%;border: 0px;width: 600px; font-size:20px;color: #3e2723;background: #ffffff;border-top-left-radius:2em;
+border-bottom-left-radius:2em;}
+#jimei div{float: left;}
+
+body{
+	 background-image: url(../images/bakground.png);
+	 background-repeat: no-repeat;
+	 background-size:cover
+}
+.search{ background: #A3D0C3; }
+/*body{
+	background-image: url(../images/back.png);
+	background-repeat:no-repeat;
+	background-size: cover;
+}*/
+.resultList{
+	width: 730px;
+	opacity: 0.9;
+
+}
+.keyword{
+	color: #d50000;
+
+
+}
+.infoHead{
+	color: #2962ff;
+	font-size: 18px;
+	font-weight: bold;
+
+}
+.infoBody{
+  color: #000000 ;
+  font-weight: bold;
+  font-size: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+
+
+
+}
+.totalTimes{
+	color: #3e2723 ;
+	font-size: 14px;
+	font-weight: bold;
+
+}
+
