@@ -1,4 +1,4 @@
-# 集美大学21个学院爬虫
+# 基于集美大学21个学院的搜索引擎
 # 0x1项目简介
 主要是使用Scrapy框架对集美大学21个学院的网站数据进行爬取,然后用elasticsearch对数据进行检索，最后用python的django框架建立简单的搜索界面
 爬取了网页连接、网页标题、网页正文内容。    
@@ -119,4 +119,4 @@ https://blog.cfyqy.com/article/4bb939f5.html
 Web使用django框架写的，一个比较简单的搜索框。 
 需要安装django和elasticsearch库的依赖。  
 界面样貌如下：
-![](./result.png)
+![](https://github.com/ye1sec/JiMeiCrawlerSE/blob/master/result.png)
