@@ -119,4 +119,4 @@ https://blog.cfyqy.com/article/4bb939f5.html
 Web使用django框架写的，一个比较简单的搜索框。 
 需要安装django和elasticsearch库的依赖。  
 界面样貌如下：
-![](https://github.com/ye1sec/JiMeiCrawlerSE/blob/master/result.png)
+![Image](https://github.com/ye1sec/JiMeiCrawlerSE/blob/master/result.png)
